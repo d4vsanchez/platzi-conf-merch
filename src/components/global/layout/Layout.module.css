@@ -1,0 +1,6 @@
+.main {
+  display: grid;
+  grid-template-columns: minmax(auto, 768px);
+  justify-content: center;
+  padding: 10px;
+}
