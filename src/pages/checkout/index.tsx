@@ -1,5 +1,8 @@
 import type { NextPage } from 'next'
 
+import Link from 'next/link'
+import { TrashIcon } from '@heroicons/react/solid'
+
 import styles from '@/styles/Checkout.module.css'
 
 const Checkout: NextPage = () => {
@@ -13,7 +16,9 @@ const Checkout: NextPage = () => {
             <h4>Item name</h4>
             <span>$10</span>
           </div>
-          <button type="button">Eliminar</button>
+          <button type="button">
+            <TrashIcon height={20} />
+          </button>
         </div>
         {/* Checkout item */}
       </div>
@@ -22,7 +27,9 @@ const Checkout: NextPage = () => {
         <h3>
           Precio Total: <span>$10</span>
         </h3>
-        <button type="button">Continuar pedido</button>
+        <Link href="/checkout/information" passHref>
+          <button type="button">Continuar pedido</button>
+        </Link>
       </div>
     </div>
   )

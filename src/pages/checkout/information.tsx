@@ -1,5 +1,7 @@
 import type { NextPage } from 'next'
 
+import Link from 'next/link'
+
 const CheckoutInformation: NextPage = () => {
   return (
     <div>
@@ -53,8 +55,13 @@ const CheckoutInformation: NextPage = () => {
       </form>
 
       <div>
-        <button type="button">Regresar</button>
-        <button type="button">Pagar</button>
+        <Link href="/checkout" passHref>
+          <button type="button">Regresar</button>
+        </Link>
+
+        <Link href="/checkout/payment" passHref>
+          <button type="button">Pagar</button>
+        </Link>
       </div>
 
       <aside>
