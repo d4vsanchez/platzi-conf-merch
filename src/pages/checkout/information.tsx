@@ -1,7 +1,5 @@
 import type { NextPage } from 'next'
 
-import styled from '@/styles/Information.module.css'
-
 const CheckoutInformation: NextPage = () => {
   return (
     <div>
