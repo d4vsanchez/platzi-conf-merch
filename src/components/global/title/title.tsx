@@ -3,7 +3,7 @@ import type { FC } from 'react'
 
 export const Title: FC<TitleProps> = ({ children, className }) => {
   return (
-    <h3 tw="text-lg font-bold" className={className}>
+    <h3 tw="text-lg font-bold mb-4" className={className}>
       {children}
     </h3>
   )
