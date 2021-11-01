@@ -8,7 +8,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout>
       <GlobalStyles />
-      <Component {...pageProps} />
+      <main id="test">
+        <Component {...pageProps} />
+      </main>
     </Layout>
   )
 }
