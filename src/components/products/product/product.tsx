@@ -1,3 +1,4 @@
+import 'twin.macro'
 import type { FC } from 'react'
 import type { Product as ProductType } from '@/types/products'
 
@@ -5,28 +6,22 @@ import Image from 'next/image'
 
 import { usd } from '@/utils/currency'
 
-import styles from './Product.module.css'
-
 export const Product: FC<ProductProps> = ({ product }) => {
   return (
-    <article className={styles.container}>
-      <Image
-        src={product.image}
-        alt={product.title}
-        height={200}
-        width={200}
-        className={styles.image}
-        objectFit="contain"
-      />
+    <article tw="shadow rounded-md overflow-hidden flex flex-col justify-center">
+      <Image src={product.image} alt={product.title} height={200} width={200} objectFit="contain" tw="mx-auto my-0" />
 
-      <div className={styles.info}>
-        <h2>
-          {product.title} <span>{usd(product.price)}</span>
+      <section tw="px-4">
+        <h2 tw="text-xl flex items-center justify-between">
+          {product.title}
+          <span tw="text-sm font-bold">{usd(product.price)}</span>
         </h2>
-        <p>{product.description}</p>
-      </div>
+        <p tw="my-4 text-sm">{product.description}</p>
+      </section>
 
-      <button type="button">Comprar</button>
+      <button type="button" tw="bg-green-600 py-2 text-white hover:bg-green-700">
+        Comprar
+      </button>
     </article>
   )
 }
