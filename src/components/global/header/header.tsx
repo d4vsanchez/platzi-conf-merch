@@ -1,3 +1,4 @@
+import 'twin.macro'
 import type { FC } from 'react'
 
 import Link from 'next/link'
@@ -7,14 +8,14 @@ import styles from './Header.module.css'
 
 export const Header: FC = () => {
   return (
-    <header className={styles.header}>
-      <h1>PlatziConf Merch</h1>
+    <header tw="flex justify-between items-center py-4 mb-6">
+      <Link href="/" passHref>
+        <h1 tw="text-2xl hover:text-gray-400 hover:cursor-pointer">PlatziConf Merch</h1>
+      </Link>
 
-      <div className={styles['header-checkout']}>
-        <Link href="/checkout" passHref>
-          <ShoppingBagIcon />
-        </Link>
-      </div>
+      <Link href="/checkout" passHref>
+        <ShoppingBagIcon tw="w-6 hover:cursor-pointer hover:text-gray-400" />
+      </Link>
     </header>
   )
 }
