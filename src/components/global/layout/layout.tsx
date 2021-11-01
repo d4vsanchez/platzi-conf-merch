@@ -6,7 +6,7 @@ import { Footer } from '@/components/global/footer'
 
 export const Layout: FC = ({ children }) => {
   return (
-    <div tw="max-w-screen-md mx-auto">
+    <div tw="max-w-screen-md mx-auto px-6">
       <a href="#test" tw="-translate-y-full absolute focus:translate-y-0">
         Skip to main content
       </a>

@@ -9,8 +9,8 @@ const CheckoutInformation: NextPage = () => {
     <>
       <Title>Información de Contacto</Title>
 
-      <div tw="flex">
-        <div tw="flex-grow mr-10">
+      <div tw="flex flex-col md:flex-row">
+        <div tw="flex-grow order-2 md:mr-10 md:order-1">
           <form action="">
             <label tw="block text-gray-700 text-sm font-bold mb-4">
               Nombre completo
@@ -111,7 +111,7 @@ const CheckoutInformation: NextPage = () => {
           </div>
         </div>
 
-        <aside tw="shadow w-64 py-2 px-4 rounded">
+        <aside tw="w-full shadow py-2 px-4 rounded order-1 mb-8 md:order-2 md:max-w-xs md:mb-0">
           <Title tw="mb-2 font-normal">Pedido</Title>
 
           <ul>
