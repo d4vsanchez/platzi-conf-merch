@@ -1,14 +1,26 @@
 import 'twin.macro'
 import type { NextPage } from 'next'
+import type { ShippingAddressData } from '@/types/shippingAddress'
 
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { Title } from '@/components/global/title'
+import { useShippingAddress } from '@/hooks/useShippingAddress'
 
 const CheckoutInformation: NextPage = () => {
-  const { register, handleSubmit, formState } = useForm({ mode: 'onTouched' })
+  const { push } = useRouter()
+  const { getDefaultShipppingAddress, addShippingAddress } = useShippingAddress()
+  const { register, handleSubmit, formState } = useForm({
+    mode: 'onTouched',
+    defaultValues: getDefaultShipppingAddress(),
+  })
+
   const { isDirty, isValid } = formState
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = (data: ShippingAddressData) => {
+    addShippingAddress(data)
+    push('/checkout/payment')
+  }
 
   return (
     <>
@@ -105,16 +117,14 @@ const CheckoutInformation: NextPage = () => {
               </button>
             </Link>
 
-            <Link href="/checkout/payment" passHref>
-              <button
-                type="button"
-                disabled={!isDirty || !isValid}
-                onClick={handleSubmit(onSubmit)}
-                tw="bg-green-600 rounded p-2 text-white w-full ml-5 hover:bg-green-700 disabled:opacity-50"
-              >
-                Pagar
-              </button>
-            </Link>
+            <button
+              type="button"
+              disabled={!isDirty || !isValid}
+              onClick={handleSubmit(onSubmit)}
+              tw="bg-green-600 rounded p-2 text-white w-full ml-5 hover:bg-green-700 disabled:opacity-50"
+            >
+              Pagar
+            </button>
           </div>
         </div>
 
