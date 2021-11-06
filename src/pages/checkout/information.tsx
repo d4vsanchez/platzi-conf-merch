@@ -6,10 +6,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { Title } from '@/components/global/title'
+import { CheckoutList } from '@/components/checkout/list'
+import { useShoppingCart } from '@/hooks/useShoppingCart'
 import { useShippingAddress } from '@/hooks/useShippingAddress'
 
 const CheckoutInformation: NextPage = () => {
-  const { push } = useRouter()
+  const router = useRouter()
+  const shoppingCart = useShoppingCart()
+
   const { getDefaultShipppingAddress, addShippingAddress } = useShippingAddress()
   const { register, handleSubmit, formState } = useForm({
     mode: 'onTouched',
@@ -19,7 +23,7 @@ const CheckoutInformation: NextPage = () => {
   const { isDirty, isValid } = formState
   const onSubmit = (data: ShippingAddressData) => {
     addShippingAddress(data)
-    push('/checkout/payment')
+    router.push('/checkout/payment')
   }
 
   return (
@@ -129,13 +133,9 @@ const CheckoutInformation: NextPage = () => {
         </div>
 
         <aside tw="w-full shadow py-2 px-4 rounded order-1 mb-8 md:order-2 md:max-w-xs md:mb-0">
-          <Title tw="mb-2 font-normal">Pedido</Title>
+          <Title tw="mb-2 font-normal">Artículos en el pedido</Title>
 
-          <ul>
-            <li tw="flex justify-between">
-              Item name <span tw="font-bold">$10</span>
-            </li>
-          </ul>
+          <CheckoutList products={shoppingCart.items} />
         </aside>
       </div>
     </>

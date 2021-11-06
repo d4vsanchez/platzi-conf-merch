@@ -3,7 +3,7 @@ import type { Product } from '@/types/products'
 
 import { CheckoutItem } from '@/components/checkout/item'
 
-export const CheckoutList: FC<CheckoutListProps> = ({ products, onRemove = () => {} }) => {
+export const CheckoutList: FC<CheckoutListProps> = ({ products, onRemove }) => {
   return (
     <>
       {products.map((product) => (
