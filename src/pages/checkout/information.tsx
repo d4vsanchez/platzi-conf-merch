@@ -2,21 +2,25 @@ import 'twin.macro'
 import type { NextPage } from 'next'
 
 import Link from 'next/link'
+import { useForm } from 'react-hook-form'
 import { Title } from '@/components/global/title'
 
 const CheckoutInformation: NextPage = () => {
+  const { register, handleSubmit, formState } = useForm({ mode: 'onTouched' })
+  const { isDirty, isValid } = formState
+  const onSubmit = (data) => console.log(data)
+
   return (
     <>
       <Title>Información de Contacto</Title>
 
       <div tw="flex flex-col md:flex-row">
         <div tw="flex-grow order-2 md:mr-10 md:order-1">
-          <form action="">
+          <form>
             <label tw="block text-gray-700 text-sm font-bold mb-4">
               Nombre completo
               <input
-                type="text"
-                name="name"
+                {...register('name', { required: true, minLength: 1 })}
                 tw="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring mt-1"
               />
             </label>
@@ -25,7 +29,7 @@ const CheckoutInformation: NextPage = () => {
               Email
               <input
                 type="email"
-                name="email"
+                {...register('email', { required: true, pattern: /\S+@\S+\.\S+/ })}
                 tw="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring mt-1"
               />
             </label>
@@ -34,7 +38,7 @@ const CheckoutInformation: NextPage = () => {
               Dirección
               <input
                 type="text"
-                name="address"
+                {...register('address', { required: true })}
                 tw="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring mt-1"
               />
             </label>
@@ -43,7 +47,7 @@ const CheckoutInformation: NextPage = () => {
               Apartamento, unidad, suite, edificio, etc.
               <input
                 type="text"
-                name="address2"
+                {...register('address2')}
                 tw="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring mt-1"
               />
             </label>
@@ -52,7 +56,7 @@ const CheckoutInformation: NextPage = () => {
               País
               <input
                 type="text"
-                name="country"
+                {...register('country', { required: true })}
                 tw="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring mt-1"
               />
             </label>
@@ -61,7 +65,7 @@ const CheckoutInformation: NextPage = () => {
               Estado
               <input
                 type="text"
-                name="state"
+                {...register('state', { required: true })}
                 tw="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring mt-1"
               />
             </label>
@@ -70,7 +74,7 @@ const CheckoutInformation: NextPage = () => {
               Ciudad
               <input
                 type="text"
-                name="city"
+                {...register('city', { required: true })}
                 tw="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring mt-1"
               />
             </label>
@@ -78,10 +82,8 @@ const CheckoutInformation: NextPage = () => {
             <label tw="block text-gray-700 text-sm font-bold mb-4">
               Código Postal
               <input
-                type="text"
                 inputMode="numeric"
-                name="zip"
-                pattern="[0-9]*"
+                {...register('zipCode', { required: false, pattern: /^[0-9]{5,6}(?:-[0-9]{4})?$/ })}
                 tw="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring mt-1"
               />
             </label>
@@ -90,7 +92,7 @@ const CheckoutInformation: NextPage = () => {
               Teléfono
               <input
                 type="tel"
-                name="telephone"
+                {...register('telNumber', { required: false })}
                 tw="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring mt-1"
               />
             </label>
@@ -104,7 +106,12 @@ const CheckoutInformation: NextPage = () => {
             </Link>
 
             <Link href="/checkout/payment" passHref>
-              <button type="button" tw="bg-green-600 rounded p-2 text-white hover:bg-green-700 w-full ml-5">
+              <button
+                type="button"
+                disabled={!isDirty || !isValid}
+                onClick={handleSubmit(onSubmit)}
+                tw="bg-green-600 rounded p-2 text-white w-full ml-5 hover:bg-green-700 disabled:opacity-50"
+              >
                 Pagar
               </button>
             </Link>
